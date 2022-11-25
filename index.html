@@ -104,14 +104,14 @@
 				  </tr>				  
 				  <tr>
 					<td><center><h3 id="i1"><p>{{ i1a }}</p></h3></center></td>
-					<td><center><h3 id="i2">22 844</h3></center></td>
+					<td><center><h3 id="i2">{{ i2a }}</h3></center></td>
 				  </tr>
 				  <tr>
 					<td colspan="2" align="center"><h5>9 мес. 2022 года</h5></td>
 				  </tr>				  
 				  <tr>
-					<td><center><h3 id="i3">39 682</h3></center></td>
-					<td><center><h3 id="i4">35 178</h3></center></td>
+					<td><center><h3 id="i3">{{ i3a }}</h3></center></td>
+					<td><center><h3 id="i4">{{ i4a }}</h3></center></td>
 				  </tr>
 				
 				</tbody></table>
@@ -342,21 +342,44 @@
   data() {
     return { 
       i1: 0,
-      tweenedNumber: 0
+      i1t: 0,
+	  i2: 0,
+      i2t: 0,
+	  i3: 0,
+      i3t: 0,
+	  i4: 0,
+      i4t: 0
+ 
     
     }
   },
 
     computed: {
     i1a() {
-      return this.tweenedNumber.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    // return numberWithSpaces(this.tweenedNumber)
-	//  numberWithSpaces(i1)
+      return this.i1t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    },
+	 i2a() {
+      return this.i2t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    },
+	 i3a() {
+      return this.i3t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    },
+	 i4a() {
+      return this.i4t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
     }
   },
   watch: {
     i1(newValue) {
-      gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue })
+      gsap.to(this.$data, { duration: 0.5, i1t: newValue })
+    },
+	   i2(newValue) {
+      gsap.to(this.$data, { duration: 0.5, i2t: newValue })
+    },
+	  i3(newValue) {
+      gsap.to(this.$data, { duration: 0.5, i3t: newValue })
+    },
+	  i4(newValue) {
+      gsap.to(this.$data, { duration: 0.5, i4t: newValue })
     }
   }
   
@@ -598,9 +621,12 @@ Chart2 = new Chart($ctx2, {
 	document.getElementById('h2').innerHTML = h2;
 //	document.getElementById('i1').innerHTML = numberWithSpaces(i1);
     vm.i1=i1;
-	document.getElementById('i2').innerHTML = numberWithSpaces(i2);
-	document.getElementById('i3').innerHTML = numberWithSpaces(i3);
-	document.getElementById('i4').innerHTML = numberWithSpaces(i4);
+	vm.i2=i2;
+	vm.i3=i3;
+	vm.i4=i4;
+//	document.getElementById('i2').innerHTML = numberWithSpaces(i2);
+//	document.getElementById('i3').innerHTML = numberWithSpaces(i3);
+//	document.getElementById('i4').innerHTML = numberWithSpaces(i4);
 	PaintChart1(j1,j2,j3,j4);
 	PaintChart2(k1,k2,k3,k4,k5);
     }
