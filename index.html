@@ -103,7 +103,7 @@
 					<td colspan="2" align="center"><h5>9 мес. 2021 года</h5></td>
 				  </tr>				  
 				  <tr>
-					<td><center><h3 id="i1"><p>{{ animatedNumber }}</p></h3></center></td>
+					<td><center><h3 id="i1"><p>{{ i1a }}</p></h3></center></td>
 					<td><center><h3 id="i2">22 844</h3></center></td>
 				  </tr>
 				  <tr>
@@ -341,22 +341,21 @@
   const app = Vue.createApp({
   data() {
     return { 
-      a1: 4,
-      number: 0,
+      i1: 0,
       tweenedNumber: 0
     
     }
   },
 
     computed: {
-    animatedNumber() {
+    i1a() {
       return this.tweenedNumber.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
     // return numberWithSpaces(this.tweenedNumber)
 	//  numberWithSpaces(i1)
     }
   },
   watch: {
-    number(newValue) {
+    i1(newValue) {
       gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue })
     }
   }
@@ -598,7 +597,7 @@ Chart2 = new Chart($ctx2, {
 	document.getElementById('h1').innerHTML = h1;
 	document.getElementById('h2').innerHTML = h2;
 //	document.getElementById('i1').innerHTML = numberWithSpaces(i1);
-    vm.number=i1;
+    vm.i1=i1;
 	document.getElementById('i2').innerHTML = numberWithSpaces(i2);
 	document.getElementById('i3').innerHTML = numberWithSpaces(i3);
 	document.getElementById('i4').innerHTML = numberWithSpaces(i4);
