@@ -1,678 +1,1090 @@
 <!DOCTYPE html>
 
-<html lang="ru"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>HR-аналитика</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="index_files/bootstrap.min.css">
-  <script src="index_files/jquery.min.js"></script>
-  <script src="index_files/popper.min.js"></script>
-  <script src="index_files/bootstrap.min.js"></script>
-  
-    <script src="script/vue.global.js "></script>
-    <script src="script/gsap.min.js"></script>
+<html lang="ru">
 
-   <script src="index_files/Chart.bundle.min.js"></script>
- 
-  <style>
-    .card { padding: 1px;  border-width: 3px !important; }
-    h5 { color: #2FA6DA ; }
-    h3 { color: white ; font-weight: bold; font-size: 2.0rem;}
-	.btn { color: white ; font-weight: bold; font-size: 1.7rem;}
-    .card {height: 90%;}
-    #container1 {border-radius: 1px;border: 1px solid #787878;padding: 20px; padding-left: 35px; padding-right: 35px;}
-	#container2 {padding: 20px; }
-	.card-header {padding: 3px; background-color: #3B3838 !important;}
-    .bg-dark {background-color: #3B3838 !important;}
-	.card-header{ display: flex; height: 100%; align-items: center; justify-content: center;}
-	h4{flex: 1;}
-  </style>
-<style type="text/css">/* Chart.js */
-@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>HR-аналитика</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="index_files/bootstrap.min.css">
+	<script src="index_files/jquery.min.js"></script>
+	<script src="index_files/popper.min.js"></script>
+	<script src="index_files/bootstrap.min.js"></script>
+
+	<script src="script/vue.global.js "></script>
+	<script src="script/gsap.min.js"></script>
+
+	<script src="index_files/Chart.bundle.min.js"></script>
+	<style>
+		.card {
+			padding: 1px;
+			border-width: 3px !important;
+		}
+
+		h5 {
+			color: #2FA6DA;
+		}
+
+		h3 {
+			color: white;
+			font-weight: bold;
+			font-size: 2.0rem;
+		}
+
+		.btn {
+			color: white;
+			font-weight: bold;
+			font-size: 1.7rem;
+		}
+
+		.card {
+			height: 90%;
+		}
+
+		#container1 {
+			border-radius: 1px;
+			border: 1px solid #787878;
+			padding: 20px;
+			padding-left: 35px;
+			padding-right: 35px;
+		}
+
+		#container2 {
+			padding: 20px;
+		}
+
+		.card-header {
+			padding: 3px;
+			background-color: #3B3838 !important;
+		}
+
+		.bg-dark {
+			background-color: #3B3838 !important;
+		}
+
+		.card-header {
+			display: flex;
+			height: 100%;
+			align-items: center;
+			justify-content: center;
+		}
+
+		h4 {
+			flex: 1;
+		}
+	</style>
+	<style type="text/css">
+		/* Chart.js */
+		@keyframes chartjs-render-animation {
+			from {
+				opacity: .99
+			}
+
+			to {
+				opacity: 1
+			}
+		}
+
+		.chartjs-render-monitor {
+			animation: chartjs-render-animation 1ms
+		}
+
+		.chartjs-size-monitor,
+		.chartjs-size-monitor-expand,
+		.chartjs-size-monitor-shrink {
+			position: absolute;
+			direction: ltr;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			overflow: hidden;
+			pointer-events: none;
+			visibility: hidden;
+			z-index: -1
+		}
+
+		.chartjs-size-monitor-expand>div {
+			position: absolute;
+			width: 1000000px;
+			height: 1000000px;
+			left: 0;
+			top: 0
+		}
+
+		.chartjs-size-monitor-shrink>div {
+			position: absolute;
+			width: 200%;
+			height: 200%;
+			left: 0;
+			top: 0
+		}
+	</style>
+</head>
+
 <body>
 
-<div class="container-fluid bg-light" id="container2">
-<div id="container1" class="container-fluid bg-white" style="padding-top: 1px">
- 
- <div class="row bg-white">
- <div class="col-lg-4"> </div>
- <div class="col-lg-8"> <center><h4><strong>HR-аналитика</strong></h4></center> </div>
- </div>
- 
-  <div class="row bg-dark">
-   <div id="col1" class="col-lg-4"> <!-- left col pole-->
- 
-   <div id="logo1" class="row bg-white">
-       <div class="col-lg-12"><!-- foto1 pole-->
-	   <div class="row bg-white">
-	   <div class="col-lg-6">
-	   <p></p><center><img src="index_files/aig.png" class="img-circle" width="200" height="200"></center><p></p>
-	   </div>
-	   <div class="col-lg-6">
-	   <p></p>
-				  
-					<h2><strong>Артамонов <br> Игорь <br> Георгиевич</strong></h2>
-					<h5 style="color: black"><p></p>Губернатор <br> Липецкой области</h5>
-				  
-	   </div> 
-	   </div>
-	   
-	   </div> 
-    </div>
-   
-   
-      <div class="row bg-dark">
-       <div class="col-lg-12"><!-- menu1 -->
-	   
-			<p></p>
-			<div id="card_menu1" class="card border bg-dark text-white rounded" style="min-height: 393.252px;">
-<p></p>
-<div class="card-header" style="flex:0">  			
-<div class="dropdown text-center">
-    <button id="Btn1" type="button" class="btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
-    <h5 class="text-white">Исполнительный орган государственной власти</h5>
-    </button> 
-    <div class="dropdown-menu">
-	  <a class="dropdown-item" href="#" onclick="Paint1('Исполнительные органы государственной власти Липецкой области',1733,1457,296,1161,181,189,41,32,32,32,32,2,48,24,76,31474,22844,39682,35178,138,528,564,274,216,292,200,242,245)"> <b>Исполнительные органы государственной власти Липецкой области</b></a> <div class="dropdown-divider"></div><a class="dropdown-item" href="#" onclick="Paint1('Государственная жилищная инспекция Липецкой области',52,48,8,40,19,22,39,2,2,2,2,1,13,29,71,26592,20440,26472,24090,7,22,16,6,9,12,9,3,2)">Государственная жилищная инспекция Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Инспекция госстройнадзора Липецкой области',20,19,5,14,0,3,43,1,1,1,1,0,4,60,40,0,0,66431,54128,0,6,10,4,2,3,2,4,9)">Инспекция госстройнадзора Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Инспекция гостехнадзора Липецкой области',39,38,5,33,3,4,45,1,1,1,1,0,1,89,11,0,0,62036,66960,0,12,12,14,1,8,7,9,10)">Инспекция гостехнадзора Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Представительство Правительства Липецкой области при Правительстве Российской Федерации',11,5,1,4,1,5,40,1,1,1,1,0,0,80,20,0,0,90284,97785,0,2,2,1,1,1,0,0,0)">Представительство Правительства Липецкой области при Правительстве Российской Федерации</a><a class="dropdown-item" href="#" onclick="Paint1('Управление административных органов Липецкой области',176,156,5,151,17,18,39,1,1,1,1,0,0,9,91,0,0,49580,46873,16,74,60,13,21,34,28,41,37)">Управление административных органов Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление ветеринарии Липецкой области',25,22,5,17,2,3,42,1,1,1,1,0,0,33,67,29550,18126,31231,22410,5,5,8,6,4,3,4,3,9)">Управление ветеринарии Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление внутренней политики Липецкой области',36,33,8,25,8,5,41,1,1,1,1,0,4,42,58,31246,22752,32023,26355,2,14,14,6,5,10,2,8,2)">Управление внутренней политики Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление делами Правительства Липецкой области',268,218,42,176,25,28,42,1,1,1,1,0,0,32,68,35964,26873,35895,32293,21,76,75,48,32,48,32,31,59)">Управление делами Правительства Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление дорог и транспорта Липецкой области',36,37,8,29,3,5,42,1,1,1,1,0,3,22,78,0,0,48378,48866,2,17,11,7,4,6,6,6,9)">Управление дорог и транспорта Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление ЖКХ Липецкой области',27,25,6,19,4,4,40,1,1,1,1,0,2,27,73,0,0,63991,50189,4,11,7,4,7,4,6,3,2)">Управление ЖКХ Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление ЗАГС и архивов Липецкой области',19,15,5,10,0,0,46,1,1,1,1,0,0,19,81,0,0,123397,86292,0,4,6,6,1,4,0,2,6)">Управление ЗАГС и архивов Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление здравоохранения Липецкой области',72,73,16,57,8,8,44,1,1,1,1,0,0,17,83,0,0,56201,64372,4,21,29,21,14,18,14,9,6)">Управление здравоохранения Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление имущественных и земельных отношений Липецкой области',88,59,13,46,14,14,39,1,1,1,1,0,0,7,93,0,0,61795,51822,10,23,22,5,13,18,11,11,5)">Управление имущественных и земельных отношений Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление инвестиций и инноваций Липецкой области',30,30,8,22,3,2,40,1,1,1,1,0,0,25,75,0,0,65882,54299,4,9,18,1,3,6,8,5,4)">Управление инвестиций и инноваций Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление информационной политики Липецкой области',22,21,6,15,1,5,42,1,1,1,1,0,0,38,62,0,0,73342,53290,0,10,7,4,4,3,2,4,2)">Управление информационной политики Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление культуры и туризма Липецкой области',41,23,7,16,1,2,39,1,1,1,1,0,0,9,91,0,0,66285,52200,4,10,5,4,6,3,2,4,3)">Управление культуры и туризма Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление лесного хозяйства Липецкой области',30,29,8,21,4,3,45,1,1,1,1,0,1,41,59,0,0,56522,41651,0,10,12,7,2,6,9,3,4)">Управление лесного хозяйства Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление молодежной политики Липецкой области',7,7,2,5,9,1,33,1,1,1,1,0,0,25,75,0,0,35949,32361,2,6,0,0,3,1,1,0,1)">Управление молодежной политики Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление образования и науки Липецкой области ',135,57,16,41,6,5,44,1,1,1,1,0,0,16,84,43321,37024,52480,54589,2,14,23,18,7,6,8,16,13)">Управление образования и науки Липецкой области </a><a class="dropdown-item" href="#" onclick="Paint1('Управление по охране объектов культурного наследия Липецкой области',9,9,2,7,2,2,48,1,1,1,1,0,0,22,78,29473,18353,29404,22470,0,1,5,3,0,0,2,1,2)">Управление по охране объектов культурного наследия Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление по охране, использованию объектов животного мира и водных биологических ресурсов Липецкой области',31,16,2,14,1,1,43,1,1,1,1,1,3,75,25,0,0,47281,33455,2,3,7,4,2,4,2,3,3)">Управление по охране, использованию объектов животного мира и водных биологических ресурсов Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление потребительского рынка и ценовой политики Липецкой области',36,34,8,26,2,3,40,1,1,1,1,0,0,22,78,0,0,64274,55732,2,16,16,3,4,8,8,10,6)">Управление потребительского рынка и ценовой политики Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление сельского хозяйства Липецкой области',81,76,19,57,4,7,44,1,1,1,1,0,0,22,78,25679,15663,28695,23187,7,17,31,22,4,6,7,8,21)">Управление сельского хозяйства Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление социальной политики Липецкой области ',104,103,21,82,5,10,43,1,1,1,1,0,0,11,89,28564,22933,31606,26081,3,30,47,25,39,24,6,10,6)">Управление социальной политики Липецкой области </a><a class="dropdown-item" href="#" onclick="Paint1('Управление строительства и архитектуры Липецкой области',35,26,6,20,7,4,38,1,1,1,1,0,0,21,79,33177,19005,34248,30123,4,13,9,2,4,5,4,6,2)">Управление строительства и архитектуры Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление физкультуры и спорта Липецкой области',16,17,6,11,4,0,40,1,1,1,1,0,0,17,83,28664,12485,31530,20981,5,4,5,4,4,3,2,5,1)">Управление физкультуры и спорта Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление финансов области',113,103,17,86,8,11,41,1,1,1,1,0,17,9,91,29530,24591,31573,28230,12,32,45,17,0,0,0,1,0)">Управление финансов области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление цифрового развития Липецкой области',21,20,6,14,1,2,41,1,1,1,1,0,0,15,85,28247,22907,32198,25777,0,9,10,1,2,8,1,6,2)">Управление цифрового развития Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление экологии и природных ресурсов Липецкой области',52,52,13,39,4,0,40,1,1,1,1,0,0,31,69,28283,18415,30329,27595,6,23,23,3,6,16,8,17,6)">Управление экологии и природных ресурсов Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление экономического развития Липецкой области',64,56,14,42,10,9,38,1,1,1,1,0,0,23,77,30180,18413,35270,30378,12,23,20,6,8,15,6,11,10)">Управление экономического развития Липецкой области</a><a class="dropdown-item" href="#" onclick="Paint1('Управление энергетики и тарифов Липецкой области',37,30,8,22,5,3,42,1,1,1,1,0,0,23,77,28623,17641,28101,25187,2,11,9,9,4,9,3,2,3)">Управление энергетики и тарифов Липецкой области</a> 
-     </div>		  
-    </div>
-  </div>			
-<p></p>				
+	<div class="container-fluid bg-light" id="container2">
+		<div id="container1" class="container-fluid bg-white" style="padding-top: 1px">
+
+			<div class="row bg-white">
+				<div class="col-lg-4"> </div>
+				<div class="col-lg-8">
+					<center>
+						<h4><strong>HR-аналитика</strong></h4>
+					</center>
+				</div>
+			</div>
+
+			<div class="row bg-dark">
+				<div id="col1" class="col-lg-4">
+					<!-- left col pole-->
+
+					<div id="logo1" class="row bg-white">
+						<div class="col-lg-12">
+							<!-- foto1 pole-->
+							<div class="row bg-white">
+								<div class="col-lg-6">
+									<p></p>
+									<center><img src="index_files/aig.png" class="img-circle" width="200" height="200">
+									</center>
+									<p></p>
+								</div>
+								<div class="col-lg-6">
+									<p></p>
+
+									<h2><strong>Артамонов <br> Игорь <br> Георгиевич</strong></h2>
+									<h5 style="color: black">
+										<p></p>Губернатор <br> Липецкой области
+									</h5>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
 
 
-<div class="card-body text-center"><h4 id="name1">Исполнительные органы государственной власти Липецкой области</h4></div>
-			<p></p>						
-			</div>	
-	   </div>   
-   </div>
-   
- 
-      <div class="row bg-dark">
-       <div class="col-lg-12"><!-- i -->
-	   		<p></p>
-			<div id="card_i1" class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Средняя зарплата, руб. </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><p>по всем сотрудникам </p></center></td>
-					<td><center><p>по рядовым сотрудникам</p></center></td>
-				  </tr>
-				  <tr>
-					<td colspan="2" align="center"><h5>9 мес. 2021 года</h5></td>
-				  </tr>				  
-				  <tr>
-					<td><center><h3 id="i1"><p>{{ i1a }}</p></h3></center></td>
-					<td><center><h3 id="i2">{{ i2a }}</h3></center></td>
-				  </tr>
-				  <tr>
-					<td colspan="2" align="center"><h5>9 мес. 2022 года</h5></td>
-				  </tr>				  
-				  <tr>
-					<td><center><h3 id="i3">{{ i3a }}</h3></center></td>
-					<td><center><h3 id="i4">{{ i4a }}</h3></center></td>
-				  </tr>
-				
-				</tbody></table>
-			</div>	
-			<p></p>	  
-	   
-	   </div>   
-   </div>
+					<div class="row bg-dark">
+						<div class="col-lg-12">
+							<!-- menu1 -->
 
-   </div>
-   <div class="col-lg-8"> <!-- right col -->
-   <div class="row bg-dark">
-       <div class="col-lg-6"><!-- a -->
-	   
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Численность, чел. </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h5>Штат</h5></center></td>
-					<td><center><h5>Факт</h5></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h3 id="a1">1733</h3></center></td>
-					<td><center><h3 id="a2">1457</h3></center></td>
-				  </tr>
-				</tbody></table>
-		  
-			</div>	
-			<p></p>
-	   
-	   </div>
-       <div class="col-lg-6"><!-- b -->
-	   
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Должности, чел. </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h5>Руководители</h5></center></td>
-					<td><center><h5>Специалисты</h5></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h3 id="b1">296</h3></center></td>
-					<td><center><h3 id="b2">1161</h3></center></td>
-				  </tr>
-				</tbody></table>
-		  
-			</div>	
-			<p></p>
-	   
-	   </div>
-   </div>
-   <div class="row bg-dark">
-       <div class="col-lg-4"><!-- c -->
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Текучесть, чел. </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h5>Назначено</h5></center></td>
-					<td><center><h5>Уволено</h5></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h3 id="c1">181</h3></center></td>
-					<td><center><h3 id="c2">189</h3></center></td>
-				  </tr>
-				</tbody></table>
-		  
-			</div>	
-			<p></p>	   
-	   </div>
-       <div class="col-lg-4"><!-- d -->
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Средний возраст </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h3 id="d1">41</h3></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h5> &nbsp; </h5></center></td>
-				  </tr> 
-
-				</tbody></table>
-			</div>	
-			<p></p>	   	   
-	   
-	   </div>
-	   <div class="col-lg-4"><!-- e -->
-	  
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div style="width:100%; padding: 0px; margin: 0px" class="card-header text-center"> <h4> Развитие </h4> </div>
-			 
-				<table text-align="center" style="width:100%; padding: 0px; margin: 0px">
-				  <tbody><tr>
-					<td style="padding: 0px; margin: 0px"><center><h5 style="font-size: 100%;">Количество участников, принявших участие в образовательных мероприятиях</h5></center></td>
-				  </tr>
-				  <tr>
-					<td style="width:100%; padding: 0px; margin: 0px"><center><h3 style="width:100%; padding: 0px; margin: 0px" id="e1">32</h3></center></td>
-				  </tr>
-				</tbody></table>
-		  
-			</div>	
-			<p></p>	   
-	   
-	   </div>
-   </div>
-   
-   
-   <div class="row bg-dark">
-       <div class="col-lg-4"><!-- f -->
-	  
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Награды, чел.</h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h5>Госуд.</h5></center></td>
-					<td><center><h5>Ведом.</h5></center></td>
-					<td><center><h5>Регион.</h5></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h3 id="f1">32</h3></center></td>
-					<td><center><h3 id="f2">32</h3></center></td>
-					<td><center><h3 id="f3">32</h3></center></td>
-				  </tr>
-				</tbody></table>
-		  
-			</div>	
-			<p></p>
-			
-	   </div>
-       <div class="col-lg-4"><!-- g -->
-	   
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Служ. проверки/ дисципл. взыскания </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h3 id="g1">2/48</h3></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h5> &nbsp; </h5></center></td>
-				  </tr>
-				   
-				</tbody></table>
-		  
-			</div>	
-			<p></p>	 	   
-	   
-	   </div>
-	   <div class="col-lg-4"><!-- h -->
-	  
-			<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Гендерный состав, % </h4> </div>
-			 
-				<table text-align="center" style="width:100%">
-				  <tbody><tr>
-					<td><center><h5>Муж.</h5></center></td>
-					<td><center><h5>Жен.</h5></center></td>
-				  </tr>
-				  <tr>
-					<td><center><h3 id="h1">24</h3></center></td>
-					<td><center><h3 id="h2">76</h3></center></td>
-				  </tr>
-				</tbody></table>
-		  
-			</div>	
-			<p></p>
-	   
-	   </div>   
-   </div>
-   
-   <div class="row bg-dark">
-        <div class="col-lg-6"><!-- j -->
-		
-		<p></p>
-			<div id="card_j1" class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Возрастной состав, чел. </h4> </div>
-	<div class="container"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-     <canvas id="Chart1" style="display: block; height: 353px; width: 706px;" class="chartjs-render-monitor" width="564" height="282"></canvas>
-	 <p></p>
-    </div>	  
-			</div>	
-			<p></p>
-		
-		
-		</div>
-        <div class="col-lg-6"><!-- k -->
-		
-		<p></p>
-			<div class="card border bg-dark text-white  rounded">
-			<div class="card-header text-center"> <h4> Кол-во сотрудников со стажем работы в органах власти, чел. </h4> </div>
-	<div class="container"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-     <canvas id="Chart2" style="display: block; height: 353px; width: 706px;" class="chartjs-render-monitor" width="564" height="282"></canvas>
-	 <p></p>
-    </div>	  
-
-	  
-			</div>	
-			<p></p>
-		
-		
-		</div>  
-   </div>
-   
-   </div>
-  </div>
+							<p></p>
+							<div id="card_menu1" class="card border bg-dark text-white rounded"
+								style="min-height: 393.252px;">
+								<p></p>
+								<div class="card-header" style="flex:0">
+									<div class="dropdown text-center">
+										<button id="Btn1" type="button" class="btn-sm btn-secondary dropdown-toggle"
+											data-toggle="dropdown">
+											<h5 class="text-white">Исполнительный орган государственной власти</h5>
+										</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="#"
+												onclick="Paint1('Исполнительные органы государственной власти Липецкой области',1733,1457,296,1161,181,189,41,32,32,32,32,2,48,24,76,31474,22844,39682,35178,138,528,564,274,216,292,200,242,245)">
+												<b>Исполнительные органы государственной власти Липецкой области</b></a>
+											<div class="dropdown-divider"></div><a class="dropdown-item" href="#"
+												onclick="Paint1('Государственная жилищная инспекция Липецкой области',52,48,8,40,19,22,39,2,2,2,2,1,13,29,71,26592,20440,26472,24090,7,22,16,6,9,12,9,3,2)">Государственная
+												жилищная инспекция Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Инспекция госстройнадзора Липецкой области',20,19,5,14,0,3,43,1,1,1,1,0,4,60,40,0,0,66431,54128,0,6,10,4,2,3,2,4,9)">Инспекция
+												госстройнадзора Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Инспекция гостехнадзора Липецкой области',39,38,5,33,3,4,45,1,1,1,1,0,1,89,11,0,0,62036,66960,0,12,12,14,1,8,7,9,10)">Инспекция
+												гостехнадзора Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Представительство Правительства Липецкой области при Правительстве Российской Федерации',11,5,1,4,1,5,40,1,1,1,1,0,0,80,20,0,0,90284,97785,0,2,2,1,1,1,0,0,0)">Представительство
+												Правительства Липецкой области при Правительстве Российской
+												Федерации</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление административных органов Липецкой области',176,156,5,151,17,18,39,1,1,1,1,0,0,9,91,0,0,49580,46873,16,74,60,13,21,34,28,41,37)">Управление
+												административных органов Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление ветеринарии Липецкой области',25,22,5,17,2,3,42,1,1,1,1,0,0,33,67,29550,18126,31231,22410,5,5,8,6,4,3,4,3,9)">Управление
+												ветеринарии Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление внутренней политики Липецкой области',36,33,8,25,8,5,41,1,1,1,1,0,4,42,58,31246,22752,32023,26355,2,14,14,6,5,10,2,8,2)">Управление
+												внутренней политики Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление делами Правительства Липецкой области',268,218,42,176,25,28,42,1,1,1,1,0,0,32,68,35964,26873,35895,32293,21,76,75,48,32,48,32,31,59)">Управление
+												делами Правительства Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление дорог и транспорта Липецкой области',36,37,8,29,3,5,42,1,1,1,1,0,3,22,78,0,0,48378,48866,2,17,11,7,4,6,6,6,9)">Управление
+												дорог и транспорта Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление ЖКХ Липецкой области',27,25,6,19,4,4,40,1,1,1,1,0,2,27,73,0,0,63991,50189,4,11,7,4,7,4,6,3,2)">Управление
+												ЖКХ Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление ЗАГС и архивов Липецкой области',19,15,5,10,0,0,46,1,1,1,1,0,0,19,81,0,0,123397,86292,0,4,6,6,1,4,0,2,6)">Управление
+												ЗАГС и архивов Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление здравоохранения Липецкой области',72,73,16,57,8,8,44,1,1,1,1,0,0,17,83,0,0,56201,64372,4,21,29,21,14,18,14,9,6)">Управление
+												здравоохранения Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление имущественных и земельных отношений Липецкой области',88,59,13,46,14,14,39,1,1,1,1,0,0,7,93,0,0,61795,51822,10,23,22,5,13,18,11,11,5)">Управление
+												имущественных и земельных отношений Липецкой области</a><a
+												class="dropdown-item" href="#"
+												onclick="Paint1('Управление инвестиций и инноваций Липецкой области',30,30,8,22,3,2,40,1,1,1,1,0,0,25,75,0,0,65882,54299,4,9,18,1,3,6,8,5,4)">Управление
+												инвестиций и инноваций Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление информационной политики Липецкой области',22,21,6,15,1,5,42,1,1,1,1,0,0,38,62,0,0,73342,53290,0,10,7,4,4,3,2,4,2)">Управление
+												информационной политики Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление культуры и туризма Липецкой области',41,23,7,16,1,2,39,1,1,1,1,0,0,9,91,0,0,66285,52200,4,10,5,4,6,3,2,4,3)">Управление
+												культуры и туризма Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление лесного хозяйства Липецкой области',30,29,8,21,4,3,45,1,1,1,1,0,1,41,59,0,0,56522,41651,0,10,12,7,2,6,9,3,4)">Управление
+												лесного хозяйства Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление молодежной политики Липецкой области',7,7,2,5,9,1,33,1,1,1,1,0,0,25,75,0,0,35949,32361,2,6,0,0,3,1,1,0,1)">Управление
+												молодежной политики Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление образования и науки Липецкой области ',135,57,16,41,6,5,44,1,1,1,1,0,0,16,84,43321,37024,52480,54589,2,14,23,18,7,6,8,16,13)">Управление
+												образования и науки Липецкой области </a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление по охране объектов культурного наследия Липецкой области',9,9,2,7,2,2,48,1,1,1,1,0,0,22,78,29473,18353,29404,22470,0,1,5,3,0,0,2,1,2)">Управление
+												по охране объектов культурного наследия Липецкой области</a><a
+												class="dropdown-item" href="#"
+												onclick="Paint1('Управление по охране, использованию объектов животного мира и водных биологических ресурсов Липецкой области',31,16,2,14,1,1,43,1,1,1,1,1,3,75,25,0,0,47281,33455,2,3,7,4,2,4,2,3,3)">Управление
+												по охране, использованию объектов животного мира и водных биологических
+												ресурсов Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление потребительского рынка и ценовой политики Липецкой области',36,34,8,26,2,3,40,1,1,1,1,0,0,22,78,0,0,64274,55732,2,16,16,3,4,8,8,10,6)">Управление
+												потребительского рынка и ценовой политики Липецкой области</a><a
+												class="dropdown-item" href="#"
+												onclick="Paint1('Управление сельского хозяйства Липецкой области',81,76,19,57,4,7,44,1,1,1,1,0,0,22,78,25679,15663,28695,23187,7,17,31,22,4,6,7,8,21)">Управление
+												сельского хозяйства Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление социальной политики Липецкой области ',104,103,21,82,5,10,43,1,1,1,1,0,0,11,89,28564,22933,31606,26081,3,30,47,25,39,24,6,10,6)">Управление
+												социальной политики Липецкой области </a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление строительства и архитектуры Липецкой области',35,26,6,20,7,4,38,1,1,1,1,0,0,21,79,33177,19005,34248,30123,4,13,9,2,4,5,4,6,2)">Управление
+												строительства и архитектуры Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление физкультуры и спорта Липецкой области',16,17,6,11,4,0,40,1,1,1,1,0,0,17,83,28664,12485,31530,20981,5,4,5,4,4,3,2,5,1)">Управление
+												физкультуры и спорта Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление финансов области',113,103,17,86,8,11,41,1,1,1,1,0,17,9,91,29530,24591,31573,28230,12,32,45,17,0,0,0,1,0)">Управление
+												финансов области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление цифрового развития Липецкой области',21,20,6,14,1,2,41,1,1,1,1,0,0,15,85,28247,22907,32198,25777,0,9,10,1,2,8,1,6,2)">Управление
+												цифрового развития Липецкой области</a><a class="dropdown-item" href="#"
+												onclick="Paint1('Управление экологии и природных ресурсов Липецкой области',52,52,13,39,4,0,40,1,1,1,1,0,0,31,69,28283,18415,30329,27595,6,23,23,3,6,16,8,17,6)">Управление
+												экологии и природных ресурсов Липецкой области</a><a
+												class="dropdown-item" href="#"
+												onclick="Paint1('Управление экономического развития Липецкой области',64,56,14,42,10,9,38,1,1,1,1,0,0,23,77,30180,18413,35270,30378,12,23,20,6,8,15,6,11,10)">Управление
+												экономического развития Липецкой области</a><a class="dropdown-item"
+												href="#"
+												onclick="Paint1('Управление энергетики и тарифов Липецкой области',37,30,8,22,5,3,42,1,1,1,1,0,0,23,77,28623,17641,28101,25187,2,11,9,9,4,9,3,2,3)">Управление
+												энергетики и тарифов Липецкой области</a>
+										</div>
+									</div>
+								</div>
+								<p></p>
 
 
+								<div class="card-body text-center">
+									<h4 id="name1">Исполнительные органы государственной власти Липецкой области</h4>
+								</div>
+								<p></p>
+							</div>
+						</div>
+					</div>
 
 
-</div>
+					<div class="row bg-dark">
+						<div class="col-lg-12">
+							<!-- i -->
+							<p></p>
+							<div id="card_i1" class="card border bg-dark text-white  rounded">
+								<div class="card-header text-center">
+									<h4> Средняя зарплата, руб. </h4>
+								</div>
 
-    <script type="text/javascript">
-	
-	
-  const app = Vue.createApp({
-  data() {
-    return { 
-      i1: 0,
-      i1t: 0,
-	  i2: 0,
-      i2t: 0,
-	  i3: 0,
-      i3t: 0,
-	  i4: 0,
-      i4t: 0
- 
-    
-    }
-  },
+								<table text-align="center" style="width:100%">
+									<tbody>
+										<tr>
+											<td>
+												<center>
+													<p>по всем сотрудникам </p>
+												</center>
+											</td>
+											<td>
+												<center>
+													<p>по рядовым сотрудникам</p>
+												</center>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" align="center">
+												<h5>9 мес. 2021 года</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<center>
+													<h3 id="i1">
+														<p>{{ i1a }}</p>
+													</h3>
+												</center>
+											</td>
+											<td>
+												<center>
+													<h3 id="i2">{{ i2a }}</h3>
+												</center>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" align="center">
+												<h5>9 мес. 2022 года</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<center>
+													<h3 id="i3">{{ i3a }}</h3>
+												</center>
+											</td>
+											<td>
+												<center>
+													<h3 id="i4">{{ i4a }}</h3>
+												</center>
+											</td>
+										</tr>
 
-    computed: {
-    i1a() {
-      return this.i1t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    },
-	 i2a() {
-      return this.i2t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    },
-	 i3a() {
-      return this.i3t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    },
-	 i4a() {
-      return this.i4t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-    }
-  },
-  watch: {
-    i1(newValue) {
-      gsap.to(this.$data, { duration: 0.5, i1t: newValue })
-    },
-	   i2(newValue) {
-      gsap.to(this.$data, { duration: 0.5, i2t: newValue })
-    },
-	  i3(newValue) {
-      gsap.to(this.$data, { duration: 0.5, i3t: newValue })
-    },
-	  i4(newValue) {
-      gsap.to(this.$data, { duration: 0.5, i4t: newValue })
-    }
-  }
-  
-})
+									</tbody>
+								</table>
+							</div>
+							<p></p>
 
-const vm = app.mount('#container2')
-	
-	
-	
-	
-      $(document).ready(function() {
-        Paint1('Исполнительные органы государственной власти Липецкой области',1733,1457,296,1161,181,189,41,32,32,32,32,2,48,24,76,31474,22844,39682,35178,138,528,564,274,216,292,200,242,245)    
-	//  $('#name2').innerHTML = '123';
-	  var maxHeight = 0;
-
-	  let elem_j1 = document.getElementById("card_j1");
-	  let coords_j1 = elem_j1.getBoundingClientRect();
-
-	  let elem_i1 = document.getElementById("card_i1");
-	  let coords_i1 = elem_i1.getBoundingClientRect();
-	  
-	  let elem_menu1 = document.getElementById("card_menu1");
-	  let coords_menu1 = elem_menu1.getBoundingClientRect();
-	  
-	  var card_menu1_Height = $('#card_menu1').height();
-	  
-	  if (coords_menu1.left < coords_j1.left) {
-		  var maxHeight = (card_menu1_Height + (coords_j1.bottom - coords_i1.bottom)*1.09);
-		  $('#card_menu1').css('min-height', maxHeight);
-	  };
-	  
-	//  maxHeight = $('#col1').height() - $('#logo1').height() - $('#card_i1').height();
-	//  let box = $(elem).getBoundingClientRect();
-	  debugger;
-   //   card_j1 = bottom: box.bottom;
-  
-	  
-//	  document.getElementById('name2').innerHTML = $('#logo1').height()+" "+$('#card_menu1').height()+" "+$('#card_i1').height()+" "+$('#col1').height()+" = "+ maxHeight;
-	//  document.getElementById('name2').innerHTML = card_j1;
-	//  $('#card_menu1').css('min-height', maxHeight-60);
-      });
-	
+						</div>
+					</div>
 
 
+					<div class="col-lg-8">
+						<!-- right col -->
+						<div class="row bg-dark">
+							<div class="col-lg-6">
+								<!-- a -->
+
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Численность, чел. </h4>
+									</div>
+
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h5>Штат</h5>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h5>Факт</h5>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h3 id="a1">1733</h3>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h3 id="a2">1457</h3>
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<p></p>
+
+							</div>
+							<div class="col-lg-6">
+								<!-- b -->
+
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Должности, чел. </h4>
+									</div>
+
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h5>Руководители</h5>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h5>Специалисты</h5>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h3 id="b1">296</h3>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h3 id="b2">1161</h3>
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<p></p>
+
+							</div>
+						</div>
+						<div class="row bg-dark">
+							<div class="col-lg-4">
+								<!-- c -->
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Текучесть, чел. </h4>
+									</div>
+
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h5>Назначено</h5>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h5>Уволено</h5>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h3 id="c1">181</h3>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h3 id="c2">189</h3>
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<p></p>
+							</div>
+							<div class="col-lg-4">
+								<!-- d -->
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Средний возраст </h4>
+									</div>
+
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h3 id="d1">41</h3>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h5> &nbsp; </h5>
+													</center>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+								<p></p>
+
+							</div>
+							<div class="col-lg-4">
+								<!-- e -->
+
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div style="width:100%; padding: 0px; margin: 0px" class="card-header text-center">
+										<h4> Развитие </h4>
+									</div>
+
+									<table text-align="center" style="width:100%; padding: 0px; margin: 0px">
+										<tbody>
+											<tr>
+												<td style="padding: 0px; margin: 0px">
+													<center>
+														<h5 style="font-size: 100%;">Количество участников, принявших
+															участие в образовательных мероприятиях</h5>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td style="width:100%; padding: 0px; margin: 0px">
+													<center>
+														<h3 style="width:100%; padding: 0px; margin: 0px" id="e1">32
+														</h3>
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<p></p>
+
+							</div>
+						</div>
 
 
-	
-//
-const $ctx1 = document.querySelector("#Chart1");;
-Chart1 = new Chart($ctx1, {
-    type: 'bar',
-    data: {
-        labels: ['0-30', '30-40', '40-50', 'от 50'],
-        datasets: [{
-            label: ' ',
-            data: [0,0,0,0],
-            backgroundColor: [
-                'rgba(255, 69, 0, 0.6)',
-                'rgba(255, 140, 0, 0.6)',
-                'rgba(255, 69, 0, 0.6)',
-                'rgba(255, 140, 0, 0.6)'
-            ],
-            borderColor: [
-                'rgba(255, 69, 0, 1)',
-                'rgba(255, 140, 0, 1)',
-                'rgba(255, 69, 0, 1)',
-                'rgba(255, 140, 0, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-	   hover: {
-        animationDuration: 1
-        },
-        animation: {
-            duration: 500,
-            easing: "easeOutQuart",
-            onComplete: function () {
-                var ctx = this.chart.ctx;
-                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom';
-                this.data.datasets.forEach(function (dataset) {
-                    for (var i = 0; i < dataset.data.length; i++) {
-                        var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                            scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
-                        ctx.fillStyle = 'white';
-                        var y_pos = model.y - 5;
-                        if ((scale_max - model.y) / scale_max >= 0.93)
-                            y_pos = model.y + 20; 
-                        ctx.fillText(dataset.data[i], model.x, y_pos);
-                    }
-                });               
-            }
-        },		
-        legend: {
-            display: false
-        },
-		tooltips: {
-            enabled: false
-        },
-        title: {
-            display: true,
-            text: '',
-            position: 'top',
-            fontSize: 24,
-            padding: 1,
-			fontColor: 'white',
-			fontStyle: 'normal'
-        },
-        scales: {
-            yAxes: [{
-				display: false,
-                ticks: {
-                    beginAtZero:true,
-                    fontColor: '#2FA6DA',
-					fontSize: 18
-                },
-            }],
-          xAxes: [{
-                ticks: {
-                    fontColor: '#2FA6DA',
-					fontSize: 24
-                },
-            }]
-        } 
-    }
-});	
- 
+						<div class="row bg-dark">
+							<div class="col-lg-4">
+								<!-- f -->
 
-    	
-//
-const $ctx2 = document.querySelector("#Chart2");;
-Chart2 = new Chart($ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['0-5', '5-10', '10-15', '15-20', 'от 20'],
-        datasets: [{
-            label: ' ',
-            data: [0,0,0,0,0],
-            backgroundColor: [
-                'rgba(255, 69, 0, 0.6)',
-                'rgba(255, 140, 0, 0.6)',
-                'rgba(255, 69, 0, 0.6)',
-                'rgba(255, 140, 0, 0.6)',
-				'rgba(255, 69, 0, 0.6)'
-            ],
-            borderColor: [
-                'rgba(255, 69, 0, 1)',
-                'rgba(255, 140, 0, 1)',
-                'rgba(255, 69, 0, 1)',
-                'rgba(255, 140, 0, 1)',
-				'rgba(255, 69, 0, 0.6)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-	   hover: {
-        animationDuration: 1
-        },
-        animation: {
-            duration: 500,
-            easing: "easeOutQuart",
-            onComplete: function () {
-                var ctx = this.chart.ctx;
-                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom';
-               this.data.datasets.forEach(function (dataset) {
-                    for (var i = 0; i < dataset.data.length; i++) {
-                        var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                            scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
-                        ctx.fillStyle = 'white';
-                        var y_pos = model.y - 5;
-                        if ((scale_max - model.y) / scale_max >= 0.93)
-                            y_pos = model.y + 20; 
-                        ctx.fillText(dataset.data[i], model.x, y_pos);
-                    }
-                });               
-            }
-        },				
-        legend: {
-            display: false
-        },
-		tooltips: {
-            enabled: false
-        },
-        title: {
-            display: true,
-            text: '',
-            position: 'top',
-            fontSize: 24,
-            padding: 1,
-			fontColor: 'white',
-			fontStyle: 'normal'
-          },
-        scales: {
-            yAxes: [{
-				display: false,
-                ticks: {
-                    beginAtZero:true,
-                    fontColor: '#2FA6DA',
-					fontSize: 18
-                },
-            }],
-          xAxes: [{
-                ticks: {
-                    fontColor: '#2FA6DA',
-					fontSize: 24
-                },
-            }]
-        } 
-    }
-});	
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Награды, чел.</h4>
+									</div>
 
-    //	
-	  
-    </script>
-	
-	
-	<script>
-    function Paint1(name,a1,a2,b1,b2,c1,c2,d1,e1,f1,f2,f3,g1,g2,h1,h2,i1,i2,i3,i4,j1,j2,j3,j4,k1,k2,k3,k4,k5) {
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h5>Госуд.</h5>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h5>Ведом.</h5>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h5>Регион.</h5>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h3 id="f1">32</h3>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h3 id="f2">32</h3>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h3 id="f3">32</h3>
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
 
-	document.getElementById('name1').innerHTML = name;
-	document.getElementById('a1').innerHTML = a1;
-	document.getElementById('a2').innerHTML = a2;
-	document.getElementById('b1').innerHTML = b1;
-	document.getElementById('b2').innerHTML = b2;
-	document.getElementById('c1').innerHTML = c1;
-	document.getElementById('c2').innerHTML = c2;  		
-   	document.getElementById('d1').innerHTML = d1;
-	document.getElementById('e1').innerHTML = e1;
-	document.getElementById('f1').innerHTML = f1;
-	document.getElementById('f2').innerHTML = f2;	
-	document.getElementById('f3').innerHTML = f3;
-	document.getElementById('g1').innerHTML = g1+"\/"+g2;	
-	document.getElementById('h1').innerHTML = h1;
-	document.getElementById('h2').innerHTML = h2;
-//	document.getElementById('i1').innerHTML = numberWithSpaces(i1);
-    vm.i1=i1;
-	vm.i2=i2;
-	vm.i3=i3;
-	vm.i4=i4;
-//	document.getElementById('i2').innerHTML = numberWithSpaces(i2);
-//	document.getElementById('i3').innerHTML = numberWithSpaces(i3);
-//	document.getElementById('i4').innerHTML = numberWithSpaces(i4);
-	PaintChart1(j1,j2,j3,j4);
-	PaintChart2(k1,k2,k3,k4,k5);
-    }
-	
-   function numberWithSpaces(x) {
-   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-   }
-   
-	   function AllHeight() {   
-		var maxHeight = 0;
-	  $('.card').each(function(){
-		if ($(this).height() > maxHeight) {
-		  maxHeight = $(this).height();
-		}
-	  });
-	  $('.card').each(function(){
-		$(this).css('min-height', maxHeight);
-	  });
-	   };
-    </script>
+								</div>
+								<p></p>
 
-    <script type="text/javascript">
+							</div>
+							<div class="col-lg-4">
+								<!-- g -->
 
-function PaintChart1(j1,j2,j3,j4) {
-    Chart1.data.datasets[0].data = [j1,j2,j3,j4];
-    Chart1.update();
-}
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Служ. проверки/ дисципл. взыскания </h4>
+									</div>
+
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h3 id="g1">2/48</h3>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h5> &nbsp; </h5>
+													</center>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+
+								</div>
+								<p></p>
+
+							</div>
+							<div class="col-lg-4">
+								<!-- h -->
+
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Гендерный состав, % </h4>
+									</div>
+
+									<table text-align="center" style="width:100%">
+										<tbody>
+											<tr>
+												<td>
+													<center>
+														<h5>Муж.</h5>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h5>Жен.</h5>
+													</center>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<center>
+														<h3 id="h1">24</h3>
+													</center>
+												</td>
+												<td>
+													<center>
+														<h3 id="h2">76</h3>
+													</center>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</div>
+								<p></p>
+
+							</div>
+						</div>
+
+						<div class="row bg-dark">
+							<div class="col-lg-6">
+								<!-- j -->
+
+								<p></p>
+								<div id="card_j1" class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Возрастной состав, чел. </h4>
+									</div>
+									<div class="container">
+										<div class="chartjs-size-monitor">
+											<div class="chartjs-size-monitor-expand">
+												<div class=""></div>
+											</div>
+											<div class="chartjs-size-monitor-shrink">
+												<div class=""></div>
+											</div>
+										</div>
+										<canvas id="Chart1" style="display: block; height: 353px; width: 706px;"
+											class="chartjs-render-monitor" width="564" height="282"></canvas>
+										<p></p>
+									</div>
+								</div>
+								<p></p>
 
 
-function PaintChart2(k1,k2,k3,k4,k5) {
-    Chart2.data.datasets[0].data = [k1,k2,k3,k4,k5];
-    Chart2.update();
-}
+							</div>
+							<div class="col-lg-6">
+								<!-- k -->
+
+								<p></p>
+								<div class="card border bg-dark text-white  rounded">
+									<div class="card-header text-center">
+										<h4> Кол-во сотрудников со стажем работы в органах власти, чел. </h4>
+									</div>
+									<div class="container">
+										<div class="chartjs-size-monitor">
+											<div class="chartjs-size-monitor-expand">
+												<div class=""></div>
+											</div>
+											<div class="chartjs-size-monitor-shrink">
+												<div class=""></div>
+											</div>
+										</div>
+										<canvas id="Chart2" style="display: block; height: 353px; width: 706px;"
+											class="chartjs-render-monitor" width="564" height="282"></canvas>
+										<p></p>
+									</div>
 
 
-    </script>
+								</div>
+								<p></p>
 
- <footer>
-      <div class="container-fluid">
-        <div class="row">
-		   <div class="col-lg-12"> <center><h6>© 2022</h6></center> </div>
-        </div>
-      </div>
- </footer>
 
-</div>
+							</div>
+						</div>
 
-    </body></html>
+					</div>
+				</div>
+
+
+
+
+			</div>
+
+			<script type="text/javascript">
+
+
+				const app = Vue.createApp({
+					data() {
+						return {
+							i1: 0,
+							i1t: 0,
+							i2: 0,
+							i2t: 0,
+							i3: 0,
+							i3t: 0,
+							i4: 0,
+							i4t: 0
+
+
+						}
+					},
+
+					computed: {
+						i1a() {
+							return this.i1t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+						},
+						i2a() {
+							return this.i2t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+						},
+						i3a() {
+							return this.i3t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+						},
+						i4a() {
+							return this.i4t.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+						}
+					},
+					watch: {
+						i1(newValue) {
+							gsap.to(this.$data, { duration: 0.5, i1t: newValue })
+						},
+						i2(newValue) {
+							gsap.to(this.$data, { duration: 0.5, i2t: newValue })
+						},
+						i3(newValue) {
+							gsap.to(this.$data, { duration: 0.5, i3t: newValue })
+						},
+						i4(newValue) {
+							gsap.to(this.$data, { duration: 0.5, i4t: newValue })
+						}
+					}
+
+				})
+
+				const vm = app.mount('#container2')
+
+
+
+
+				$(document).ready(function () {
+					Paint1('Исполнительные органы государственной власти Липецкой области', 1733, 1457, 296, 1161, 181, 189, 41, 32, 32, 32, 32, 2, 48, 24, 76, 31474, 22844, 39682, 35178, 138, 528, 564, 274, 216, 292, 200, 242, 245)
+					//  $('#name2').innerHTML = '123';
+					var maxHeight = 0;
+
+					let elem_j1 = document.getElementById("card_j1");
+					let coords_j1 = elem_j1.getBoundingClientRect();
+
+					let elem_i1 = document.getElementById("card_i1");
+					let coords_i1 = elem_i1.getBoundingClientRect();
+
+					let elem_menu1 = document.getElementById("card_menu1");
+					let coords_menu1 = elem_menu1.getBoundingClientRect();
+
+					var card_menu1_Height = $('#card_menu1').height();
+
+					if (coords_menu1.left < coords_j1.left) {
+						var maxHeight = (card_menu1_Height + (coords_j1.bottom - coords_i1.bottom) * 1.09);
+						$('#card_menu1').css('min-height', maxHeight);
+					};
+
+					//  maxHeight = $('#col1').height() - $('#logo1').height() - $('#card_i1').height();
+					//  let box = $(elem).getBoundingClientRect();
+					debugger;
+					//   card_j1 = bottom: box.bottom;
+
+
+					//	  document.getElementById('name2').innerHTML = $('#logo1').height()+" "+$('#card_menu1').height()+" "+$('#card_i1').height()+" "+$('#col1').height()+" = "+ maxHeight;
+					//  document.getElementById('name2').innerHTML = card_j1;
+					//  $('#card_menu1').css('min-height', maxHeight-60);
+				});
+
+
+
+
+
+
+				//
+				const $ctx1 = document.querySelector("#Chart1");;
+				Chart1 = new Chart($ctx1, {
+					type: 'bar',
+					data: {
+						labels: ['0-30', '30-40', '40-50', 'от 50'],
+						datasets: [{
+							label: ' ',
+							data: [0, 0, 0, 0],
+							backgroundColor: [
+								'rgba(255, 69, 0, 0.6)',
+								'rgba(255, 140, 0, 0.6)',
+								'rgba(255, 69, 0, 0.6)',
+								'rgba(255, 140, 0, 0.6)'
+							],
+							borderColor: [
+								'rgba(255, 69, 0, 1)',
+								'rgba(255, 140, 0, 1)',
+								'rgba(255, 69, 0, 1)',
+								'rgba(255, 140, 0, 1)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+						hover: {
+							animationDuration: 1
+						},
+						animation: {
+							duration: 500,
+							easing: "easeOutQuart",
+							onComplete: function () {
+								var ctx = this.chart.ctx;
+								ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+								ctx.textAlign = 'center';
+								ctx.textBaseline = 'bottom';
+								this.data.datasets.forEach(function (dataset) {
+									for (var i = 0; i < dataset.data.length; i++) {
+										var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+											scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
+										ctx.fillStyle = 'white';
+										var y_pos = model.y - 5;
+										if ((scale_max - model.y) / scale_max >= 0.93)
+											y_pos = model.y + 20;
+										ctx.fillText(dataset.data[i], model.x, y_pos);
+									}
+								});
+							}
+						},
+						legend: {
+							display: false
+						},
+						tooltips: {
+							enabled: false
+						},
+						title: {
+							display: true,
+							text: '',
+							position: 'top',
+							fontSize: 24,
+							padding: 1,
+							fontColor: 'white',
+							fontStyle: 'normal'
+						},
+						scales: {
+							yAxes: [{
+								display: false,
+								ticks: {
+									beginAtZero: true,
+									fontColor: '#2FA6DA',
+									fontSize: 18
+								},
+							}],
+							xAxes: [{
+								ticks: {
+									fontColor: '#2FA6DA',
+									fontSize: 24
+								},
+							}]
+						}
+					}
+				});
+
+
+
+				//
+				const $ctx2 = document.querySelector("#Chart2");;
+				Chart2 = new Chart($ctx2, {
+					type: 'bar',
+					data: {
+						labels: ['0-5', '5-10', '10-15', '15-20', 'от 20'],
+						datasets: [{
+							label: ' ',
+							data: [0, 0, 0, 0, 0],
+							backgroundColor: [
+								'rgba(255, 69, 0, 0.6)',
+								'rgba(255, 140, 0, 0.6)',
+								'rgba(255, 69, 0, 0.6)',
+								'rgba(255, 140, 0, 0.6)',
+								'rgba(255, 69, 0, 0.6)'
+							],
+							borderColor: [
+								'rgba(255, 69, 0, 1)',
+								'rgba(255, 140, 0, 1)',
+								'rgba(255, 69, 0, 1)',
+								'rgba(255, 140, 0, 1)',
+								'rgba(255, 69, 0, 0.6)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+						hover: {
+							animationDuration: 1
+						},
+						animation: {
+							duration: 500,
+							easing: "easeOutQuart",
+							onComplete: function () {
+								var ctx = this.chart.ctx;
+								ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+								ctx.textAlign = 'center';
+								ctx.textBaseline = 'bottom';
+								this.data.datasets.forEach(function (dataset) {
+									for (var i = 0; i < dataset.data.length; i++) {
+										var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+											scale_max = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._yScale.maxHeight;
+										ctx.fillStyle = 'white';
+										var y_pos = model.y - 5;
+										if ((scale_max - model.y) / scale_max >= 0.93)
+											y_pos = model.y + 20;
+										ctx.fillText(dataset.data[i], model.x, y_pos);
+									}
+								});
+							}
+						},
+						legend: {
+							display: false
+						},
+						tooltips: {
+							enabled: false
+						},
+						title: {
+							display: true,
+							text: '',
+							position: 'top',
+							fontSize: 24,
+							padding: 1,
+							fontColor: 'white',
+							fontStyle: 'normal'
+						},
+						scales: {
+							yAxes: [{
+								display: false,
+								ticks: {
+									beginAtZero: true,
+									fontColor: '#2FA6DA',
+									fontSize: 18
+								},
+							}],
+							xAxes: [{
+								ticks: {
+									fontColor: '#2FA6DA',
+									fontSize: 24
+								},
+							}]
+						}
+					}
+				});
+
+
+
+			</script>
+
+
+			<script>
+				function Paint1(name, a1, a2, b1, b2, c1, c2, d1, e1, f1, f2, f3, g1, g2, h1, h2, i1, i2, i3, i4, j1, j2, j3, j4, k1, k2, k3, k4, k5) {
+
+					document.getElementById('name1').innerHTML = name;
+					document.getElementById('a1').innerHTML = a1;
+					document.getElementById('a2').innerHTML = a2;
+					document.getElementById('b1').innerHTML = b1;
+					document.getElementById('b2').innerHTML = b2;
+					document.getElementById('c1').innerHTML = c1;
+					document.getElementById('c2').innerHTML = c2;
+					document.getElementById('d1').innerHTML = d1;
+					document.getElementById('e1').innerHTML = e1;
+					document.getElementById('f1').innerHTML = f1;
+					document.getElementById('f2').innerHTML = f2;
+					document.getElementById('f3').innerHTML = f3;
+					document.getElementById('g1').innerHTML = g1 + "\/" + g2;
+					document.getElementById('h1').innerHTML = h1;
+					document.getElementById('h2').innerHTML = h2;
+					//	document.getElementById('i1').innerHTML = numberWithSpaces(i1);
+					vm.i1 = i1;
+					vm.i2 = i2;
+					vm.i3 = i3;
+					vm.i4 = i4;
+					// document.getElementById('i2').innerHTML = numberWithSpaces(i2);
+					// document.getElementById('i3').innerHTML = numberWithSpaces(i3);
+					// document.getElementById('i4').innerHTML = numberWithSpaces(i4);
+					PaintChart1(j1, j2, j3, j4);
+					PaintChart2(k1, k2, k3, k4, k5);
+				}
+
+				function numberWithSpaces(x) {
+					return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+				}
+
+				function AllHeight() {
+					var maxHeight = 0;
+					$('.card').each(function () {
+						if ($(this).height() > maxHeight) {
+							maxHeight = $(this).height();
+						}
+					});
+					$('.card').each(function () {
+						$(this).css('min-height', maxHeight);
+					});
+				};
+			</script>
+
+			<script type="text/javascript">
+
+				function PaintChart1(j1, j2, j3, j4) {
+					Chart1.data.datasets[0].data = [j1, j2, j3, j4];
+					Chart1.update();
+				}
+
+
+				function PaintChart2(k1, k2, k3, k4, k5) {
+					Chart2.data.datasets[0].data = [k1, k2, k3, k4, k5];
+					Chart2.update();
+				}
+
+
+			</script>
+
+			<footer>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<center>
+								<h6>© 2022</h6>
+							</center>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+
+
+</body>
+
+</html>
